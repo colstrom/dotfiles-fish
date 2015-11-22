@@ -1,0 +1,8 @@
+* Description
+Any directories immediately in this path will be added to $fish_functions_path.
+
+* Purpose
+Supports function organization and vendoring.
+
+* Conventions
+** Most directories under this path are git submodules, and track another repository.
