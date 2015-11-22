@@ -6,7 +6,7 @@
 Welcome to my fish configuration.
 
 * Getting Started
-#+BEGIN_SRC sh :tangle git-clone.sh
+#+BEGIN_SRC sh
   git clone https://github.com/colstrom/dotfiles-fish ~/.config/fish
 #+END_SRC
 
