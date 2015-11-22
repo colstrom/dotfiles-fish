@@ -5,79 +5,28 @@
 
 Welcome to my fish configuration.
 
-** Quickstart
-
-
-#+NAME: git-clone
+* Getting Started
 #+BEGIN_SRC sh :tangle git-clone.sh
   git clone https://github.com/colstrom/dotfiles-fish ~/.config/fish
 #+END_SRC
 
-** Layout
+* Layout
 
-completions
-docs
-environment.d
-functions
-functions/vendor.d
-plugins
-
-*** config.fish
-**** Description
-
+** config.fish
+*** Description
 Primary fish configuration.
-
-**** Purpose
-
+*** Purpose
 Single entry point for loading and reloading all configuration.
+*** Conventions
+**** Be Simple
+Complexity here creeps into the rest of the system.
+**** Be Minimal
+This file will be loaded with every shell session.
+**** Be Naive
+Assume nothing about the host environment.
 
-**** Conventions
+** environment.d
+#+INCLUDE: ./environment.d/README.org
 
-Keep it simple. Complexity here creeps into the rest of the system.
-Keep it minimal. Anything that happens here has to happen before anything else.
-
-* environment.d
-** Description
-Environment configuration path.
-** Purpose
-Simplifies managing environment variables. All .fish files under this path will be sourced.
-** Conventions
-*** One file should contain only related environment settings.
-#+BEGIN_EXAMPLE
-AWS environment definitions are separate from OpenStack.
-#+END_EXAMPLE
-*** Where not prohibitively expensive, a configuration should detect if it is relevant.
-#+BEGIN_EXAMPLE
-Avoid loading OSX-specific configurations on a Linux host.
-#+END_EXAMPLE
-*** environment.d
-
-**** Description
-
-Environment configuration path.
-
-**** Purpose
-
-Simplifies managing environment variables. All .fish files under this path will be sourced.
-
-**** Conventions
-
-One file should contain only related environment settings.
-
-Example: AWS environment definitions are separate from OpenStack.
-
-Where not prohibitively expensive, a configuration should detect if it is relevant.
-
-Example: Avoid loading OSX-specific configurations on a Linux host.
-
-*** functions
-
-The default autoload path.
-
-*** functions/vendor.d
-
-Directories in this directory will be added to $fish_function_path.
-
-*** functions.d
+** functions.d
 #+INCLUDE: ./functions.d/README.org
-*** plugins
