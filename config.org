@@ -1,0 +1,63 @@
+* Disable fish greeting
+#+BEGIN_SRC fish :tangle yes
+  set --query fish_greeting
+  and set --erase fish_greeting
+#+END_SRC
+* If this is an interactive terminal
+#+BEGIN_SRC fish :tangle yes :noweb yes
+  if isatty
+    <<load-environment-configurations>>
+    <<load-function-paths>>
+  end
+#+END_SRC
+
+** If environment.d exists
+
+#+BEGIN_SRC fish :noweb-ref load-environment-configurations
+  if test -d ~/.config/fish/environment.d
+    <<find-all-environment-configurations>>
+    <<load-each-environment-configuration>>
+  end
+#+END_SRC
+
+*** Find all .fish files under it
+
+#+BEGIN_SRC fish :noweb-ref find-all-environment-configurations
+  set environment_configs (find ~/.config/fish/environment.d -type f -name \*.fish)
+#+END_SRC
+
+*** Load each file found
+
+#+BEGIN_SRC fish :noweb-ref load-each-environment-configuration
+  for config in $environment_configs
+    source $config
+  end
+#+END_SRC
+
+** If functions.d exists
+
+#+BEGIN_SRC fish :noweb-ref load-function-paths
+  if test -d ~/.config/fish/functions.d
+    <<find-all-function-paths>>
+    <<load-each-function-path>>
+  end
+#+END_SRC
+
+*** Find all directories under it
+
+#+BEGIN_SRC fish :noweb-ref find-all-function-paths
+  set function_paths (find $HOME/.config/fish/functions.d -type d -mindepth 1 | grep --invert-match --extended-regexp "$HOME/.config/fish/functions.d(.*/\.)+")
+#+END_SRC
+
+*** Append each directory found to $fish_function_path, unless already present
+
+#+BEGIN_EXAMPLE
+This may be the case if this file were sourced multiple times in a single fish session.
+#+END_EXAMPLE
+
+#+BEGIN_SRC fish :noweb-ref load-each-function-path
+  for path in $function_paths
+    contains $path $fish_function_path
+    or set fish_function_path $fish_function_path $path
+  end
+#+END_SRC
