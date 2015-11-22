@@ -1,0 +1,16 @@
+* Description
+Environment configuration path.
+
+* Purpose
+Simplifies managing environment configurations. All .fish files under this path will be sourced.
+
+* Conventions
+** One file should contain only related environment settings.
+#+BEGIN_EXAMPLE
+AWS environment definitions are separate from OpenStack.
+#+END_EXAMPLE
+
+** Where not prohibitively expensive, a configuration should detect if it is relevant.
+#+BEGIN_EXAMPLE
+Avoid loading OSX-specific configurations on a Linux host.
+#+END_EXAMPLE
