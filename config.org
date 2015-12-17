@@ -3,11 +3,12 @@
   set --query fish_greeting
   and set --erase fish_greeting
 #+END_SRC
+
 * If this is an interactive terminal
 #+BEGIN_SRC fish :tangle yes :noweb yes
   if isatty
-    <<load-environment-configurations>>
-    <<load-function-paths>>
+      <<load-environment-configurations>>
+      <<load-function-paths>>
   end
 #+END_SRC
 
@@ -15,8 +16,8 @@
 
 #+BEGIN_SRC fish :noweb-ref load-environment-configurations
   if test -d ~/.config/fish/environment.d
-    <<find-all-environment-configurations>>
-    <<load-each-environment-configuration>>
+      <<find-all-environment-configurations>>
+      <<load-each-environment-configuration>>
   end
 #+END_SRC
 
@@ -30,7 +31,7 @@
 
 #+BEGIN_SRC fish :noweb-ref load-each-environment-configuration
   for config in $environment_configs
-    source $config
+      source $config
   end
 #+END_SRC
 
@@ -57,7 +58,7 @@ This may be the case if this file were sourced multiple times in a single fish s
 
 #+BEGIN_SRC fish :noweb-ref load-each-function-path
   for path in $function_paths
-    contains $path $fish_function_path
-    or set fish_function_path $fish_function_path $path
+      contains $path $fish_function_path
+      or set fish_function_path $fish_function_path $path
   end
 #+END_SRC
